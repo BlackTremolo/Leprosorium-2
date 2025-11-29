@@ -32,5 +32,13 @@ end
 post '/new' do 
 	content = params[:content]
 
-	erb "Вы ввели: #{content}"
+	if content.size <=0
+		@error = 'Вы не ввели текс'
+		return erb :new
+	else
+		$db.execute 'insert into Posts (content, create_date) values (?, datetime())', [content]
+		erb "Вы ввели: #{content}"	
+	end
+
+	
 end
