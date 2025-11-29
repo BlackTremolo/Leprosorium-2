@@ -22,6 +22,7 @@ configure do
 end		
 
 get '/' do
+	@posts = $db.execute 'select * from Posts order by id desc'
 	erb :index
 end
 
@@ -30,14 +31,14 @@ get '/new' do
 end
 
 post '/new' do 
-	content = params[:content]
+	cont = params[:content]
 
-	if content.size <=0
+	if cont.size <=0
 		@error = 'Вы не ввели текс'
 		return erb :new
 	else
-		$db.execute 'insert into Posts (content, create_date) values (?, datetime())', [content]
-		erb "Вы ввели: #{content}"	
+		$db.execute 'insert into Posts (content, create_date) values (?, datetime())', [cont]
+		erb "Вы ввели: #{cont}"	
 	end
 
 	
