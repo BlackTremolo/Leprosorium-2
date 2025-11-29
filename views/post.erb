@@ -10,3 +10,8 @@
 		<button type="submit" class="btn btn-primary">Add comment</button>
 	</form>
 </p>
+<% @comments.each do |comment| %>
+<p><%= comment['comment'] %></p>
+<span style="font-size: 75%; color: #999;"><%= comment['create_date'] %></span>
+<hr>
+<% end %>
