@@ -31,14 +31,14 @@ get '/new' do
 end
 
 post '/new' do 
-	cont = params[:content]
+	content = params[:content]
 
-	if cont.size <=0
+	if content.size <=0
 		@error = 'Вы не ввели текс'
 		return erb :new
 	else
-		$db.execute 'insert into Posts (content, create_date) values (?, datetime())', [cont]
-		erb "Вы ввели: #{cont}"	
+		$db.execute 'insert into Posts (content, create_date) values (?, datetime())', [content]
+		redirect '/'	
 	end
 
 	
